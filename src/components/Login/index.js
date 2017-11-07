@@ -3,6 +3,8 @@ import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux';
 import { login } from './actions';
 
+import './styles.css';
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +20,7 @@ class Login extends Component {
     const { handleSubmit, pristine, reset, submitting } = this.props;
 
     return (
-      <form onSubmit={handleSubmit(this.mySubmit)}>
+      <form onSubmit={handleSubmit(this.mySubmit)} className="login">
         <div>
           <label>Email</label>
           <div>

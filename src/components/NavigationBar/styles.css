@@ -4,8 +4,24 @@
   width: 100%;
 
   top: 0;
+  height: 50px;
   max-height: 50px;
-  margin-bottom: 50px;
+  z-index: 10;
 
-  background: aqua;  
+  background: aqua;
+}
+
+.main-link-wrapper {
+  display: flex;
+  flex: 1;
+}
+
+.main-link {
+  margin: 0px;
+}
+
+.links {
+  display: flex;
+  flex-direction: row-reverse;
+  flex: 1;
 }

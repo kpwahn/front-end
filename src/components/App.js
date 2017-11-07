@@ -1,45 +1,36 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
+import PrivateRoute from './PrivateRoute';
 import NavigationBar from './NavigationBar';
+import Login from './Login';
+import Home from './Home';
 
-export default class App extends Component {
+class App extends Component {
   render() {
     return (
-      <div>
-        <NavigationBar />
+      <BrowserRouter>
         <div>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
-        <p>Some text some text some text some text..</p>
+          <NavigationBar />
+          <Switch>
+            <Route path="/login" component={Login} />
+            <PrivateRoute
+              path="/"
+              component={Home}
+              user={this.props.user}
+              />
+          </Switch>
         </div>
-      </div>
+      </BrowserRouter>
     );
   }
 }
+
+const mapStateToProps = function(state) {
+  return {
+    user: state.user
+  };
+}
+
+export default connect(mapStateToProps)(App);
