@@ -1,14 +1,16 @@
-import { LOGIN } from "./actions";
+import { handleActions } from 'redux-actions';
+import { LOGIN } from './actions';
 
-const INITIAL_STATE = {
-  isLoggedIn: false
+const defaultState = {
+  loggedIn: false
 };
 
-export default function(state = INITIAL_STATE, action) {
-  switch (action.type) {
-    case LOGIN:
-      return {...state, isLoggedIn: true};
-    default:
-      return state;
+const loginReducer = handleActions({
+  LOGIN: (state, action) => {
+    return {
+      loggedIn: true
+    };
   }
-}
+}, defaultState)
+
+export default loginReducer;

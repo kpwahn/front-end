@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux';
-import { login } from './actions';
+import loginAction from './actions';
 
 import './styles.css';
 
@@ -13,7 +13,7 @@ class Login extends Component {
   }
 
   mySubmit() {
-    this.props.login(this.props.formValues);
+    this.props.loginAction(this.props.formValues);
   }
 
   render() {
@@ -53,7 +53,7 @@ const mapStateToProps = (state) => {
 
 Login = connect(
   mapStateToProps,
-  {login}
+  {loginAction}
 )(Login);
 
 export default reduxForm({
