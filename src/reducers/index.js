@@ -5,7 +5,7 @@ import loggedInReducer from '../components/Login/reducer';
 
 const rootReducer = combineReducers({
   form: formReducer,
-  loggedIn: loggedInReducer
+  user: {...loggedInReducer}
 });
 
 export default rootReducer;

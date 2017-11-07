@@ -11,7 +11,7 @@ class Login extends Component {
   }
 
   mySubmit() {
-    this.props.login();
+    this.props.login(this.props.formValues);
   }
 
   render() {
@@ -22,7 +22,7 @@ class Login extends Component {
         <div>
           <label>Email</label>
           <div>
-            <Field name="email" component="input" type="text" placeholder="email"/>
+            <Field name="email" component="input" type="email" placeholder="email"/>
           </div>
           <label>Password</label>
           <div>
@@ -36,7 +36,17 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return{isLoggedIn: state.loggedIn.isLoggedIn}
+  if( state.form.login ) {
+    return {
+      user: state.user,
+      formValues: state.form.login.values
+    }
+  } else {
+    return {
+      user: state.user
+    }
+  }
+
 };
 
 Login = connect(
