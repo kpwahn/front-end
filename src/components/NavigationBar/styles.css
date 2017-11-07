@@ -1,0 +1,11 @@
+.navigationBar {
+  position: fixed;
+  display: flex;
+  width: 100%;
+
+  top: 0;
+  max-height: 50px;
+  margin-bottom: 50px;
+
+  background: aqua;  
+}
