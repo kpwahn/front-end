@@ -15,8 +15,15 @@ const defaultState = {
 // }, defaultState)
 
 const loginReducer = handleAction(LOGIN, {
-  next(state, action) {console.log("here")},
-  throw(state, action) {console.log("there")},
+  next(state, action) {
+    return {
+      loggedIn: true
+    };
+  },
+  throw(state, action) {
+    console.log('failed')
+    return defaultState
+  },
 }, defaultState)
 
 export default loginReducer;

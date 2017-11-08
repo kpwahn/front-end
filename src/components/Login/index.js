@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom'
 import loginAction from './actions';
 
 import './styles.css';
@@ -18,6 +19,13 @@ class Login extends Component {
 
   render() {
     const { handleSubmit, pristine, reset, submitting } = this.props;
+    const { from } = this.props.location.state || { from: { pathname: '/' } }
+
+    if (this.props.user.loggedIn){
+      return (
+       <Redirect to={from}/>
+     );
+    }
 
     return (
       <form onSubmit={handleSubmit(this.mySubmit)} className="login">

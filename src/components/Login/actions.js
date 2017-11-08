@@ -4,7 +4,7 @@ import { createAction, handleAction } from 'redux-actions';
 export const LOGIN = 'LOGIN'
 
 const loginAction = createAction(LOGIN, function(formValues) {
-  const request = axios.post(`http://localhost:3002`, {
+  const request = axios.post(`http://localhost:3000/api/authenticate`, {
       email: formValues.email,
       password: formValues.password
     });
