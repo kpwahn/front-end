@@ -6,6 +6,7 @@ const defaultState = {
   token: ''
 };
 
+// TODO do i even need the throw? (although it was cool to see how it works)
 const loginReducer = handleAction(combineActions(LOGIN, LOGOUT), {
   next: (state, action) => {
     if (action.type === LOGIN) {
@@ -16,20 +17,14 @@ const loginReducer = handleAction(combineActions(LOGIN, LOGOUT), {
           loggedIn: true,
           token: token
         };
-      } else {
-        //TODO invalid username or password
-        return defaultState;
       }
     } else if (action.type === LOGOUT) {
       return {
         loggedIn: false
       };
-    } else {
-      return defaultState
     }
   },
   throw: (state, action) => {
-    //TODO handle error, please try again or something like that
     return defaultState
   }
 }, defaultState);

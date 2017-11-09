@@ -23,11 +23,13 @@ class Login extends Component {
 
   mySubmit() {
     return this.props.loginAction(this.props.formValues).then((value) => {
-      console.log("Put failed submission handling here");
-      console.log(value)
+      // If the promise is rejected (i.e. returns a 403 or is rejected)
       if (value.error) {
+        let response = value.payload.response;
+        let responseMessage = (response) ? response.data.message : 'Unable to reach service. Please try again'
+
         throw new SubmissionError({
-          _error: value.payload.response.data.message
+          _error: responseMessage
         })
       }
     });
