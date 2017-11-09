@@ -1,29 +1,37 @@
-// import { handleActions } from 'redux-actions';
-import { handleAction } from 'redux-actions';
-import { LOGIN } from './actions';
+import { handleAction, handleActions, combineActions } from 'redux-actions';
+import { LOGIN, LOGOUT } from './actions';
 
 const defaultState = {
-  loggedIn: false
+  loggedIn: false,
+  token: ''
 };
 
-// const loginReducer = handleActions({
-//   LOGIN: (state, action) => {
-//     return {
-//       loggedIn: true
-//     };
-//   }
-// }, defaultState)
+const loginReducer = handleAction(combineActions(LOGIN, LOGOUT), {
+  next: (state, action) => {
+    if (action.type === LOGIN) {
+      let token = action.payload.data.token;
 
-const loginReducer = handleAction(LOGIN, {
-  next(state, action) {
-    return {
-      loggedIn: true
-    };
+      if (token) {
+        return {
+          loggedIn: true,
+          token: token
+        };
+      } else {
+        //TODO invalid username or password
+        return defaultState;
+      }
+    } else if (action.type === LOGOUT) {
+      return {
+        loggedIn: false
+      };
+    } else {
+      return defaultState
+    }
   },
-  throw(state, action) {
-    console.log('failed')
+  throw: (state, action) => {
+    //TODO handle error, please try again or something like that
     return defaultState
-  },
-}, defaultState)
+  }
+}, defaultState);
 
 export default loginReducer;

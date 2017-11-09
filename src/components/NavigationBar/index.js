@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { logoutAction } from '../Login/actions';
 
 import './styles.css';
 
 class NavigationBar extends Component {
   render() {
-    console.log(this)
     let logInOut;
 
     if(this.props.user.loggedIn){
-      logInOut = ( <Link to="/login">LOGOUT</Link> );
+      logInOut = ( <button onClick={this.props.logoutAction}>LOGOUT</button> );
     } else {
       logInOut = ( <Link to="/login">LOGIN</Link> );
     }
@@ -34,4 +34,4 @@ const mapStateToProps = function(state) {
   };
 }
 
-export default connect(mapStateToProps)(NavigationBar);
+export default connect(mapStateToProps, { logoutAction })(NavigationBar);

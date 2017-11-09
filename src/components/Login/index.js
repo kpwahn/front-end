@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm, SubmissionError } from 'redux-form'
 import { connect } from 'react-redux';
+import RenderField from '../RenderField';
 import { Redirect } from 'react-router-dom'
-import loginAction from './actions';
+import { loginAction } from './actions';
 
 import './styles.css';
+
+const required = value => (value ? undefined : 'Required');
+export const minLength = value =>
+  value && value.length < 8 ? `Must be 8 characters or more` : undefined
+const email = value =>
+  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
+  'Invalid email address' : undefined
 
 class Login extends Component {
   constructor(props) {
@@ -14,11 +22,19 @@ class Login extends Component {
   }
 
   mySubmit() {
-    this.props.loginAction(this.props.formValues);
+    return this.props.loginAction(this.props.formValues).then((value) => {
+      console.log("Put failed submission handling here");
+      console.log(value)
+      if (value.error) {
+        throw new SubmissionError({
+          _error: value.payload.response.data.message
+        })
+      }
+    });
   }
 
   render() {
-    const { handleSubmit, pristine, reset, submitting } = this.props;
+    const { handleSubmit, error } = this.props;
     const { from } = this.props.location.state || { from: { pathname: '/' } }
 
     if (this.props.user.loggedIn){
@@ -32,14 +48,15 @@ class Login extends Component {
         <div>
           <label>Email</label>
           <div>
-            <Field name="email" component="input" type="email" placeholder="email"/>
+            <Field name="email" component={RenderField} type="text" placeholder="email" validate={[required, email]}/>
           </div>
           <label>Password</label>
           <div>
-            <Field name="password" component="input" type="password" placeholder="password"/>
+            <Field name="password" component={RenderField} type="password" placeholder="password" validate={[required, minLength]}/>
           </div>
         </div>
-        <button type="submit" disabled={pristine || submitting}>Submit</button>
+        <div>{ error }</div>
+        <button type="submit">Submit</button>
       </form>
     );
   }
@@ -61,7 +78,7 @@ const mapStateToProps = (state) => {
 
 Login = connect(
   mapStateToProps,
-  {loginAction}
+  { loginAction }
 )(Login);
 
 export default reduxForm({

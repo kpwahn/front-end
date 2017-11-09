@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { createAction, handleAction } from 'redux-actions';
 
-export const LOGIN = 'LOGIN'
+export const LOGIN = 'LOGIN';
+export const LOGOUT = 'LOGOUT';
 
 const loginAction = createAction(LOGIN, function(formValues) {
   const request = axios.post(`http://localhost:3000/api/authenticate`, {
@@ -12,4 +13,9 @@ const loginAction = createAction(LOGIN, function(formValues) {
   return request;
 });
 
-export default loginAction;
+const logoutAction = createAction(LOGOUT, function() {
+  console.log("firing logout action");
+  return {};
+});
+
+export { loginAction, logoutAction };
