@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Field, reduxForm, SubmissionError } from 'redux-form'
+import { Field, reduxForm, SubmissionError, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux';
 import RenderField from '../RenderField';
 import { Redirect } from 'react-router-dom'
@@ -64,11 +64,14 @@ class Login extends Component {
   }
 }
 
+const selector = formValueSelector('selectingFormValues')
+
 const mapStateToProps = (state) => {
   if( state.form.login ) {
     return {
       user: state.user,
-      formValues: state.form.login.values
+      formValues: state.form.login.values,
+      email: selector(state, 'email')
     }
   } else {
     return {

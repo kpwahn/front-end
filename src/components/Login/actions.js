@@ -14,7 +14,6 @@ const loginAction = createAction(LOGIN, function(formValues) {
 });
 
 const logoutAction = createAction(LOGOUT, function() {
-  console.log("firing logout action");
   return {};
 });
 
