@@ -6,7 +6,8 @@ import PrivateRoute from './PrivateRoute';
 import NavigationBar from './NavigationBar';
 import Login from './Login';
 import Home from './Home';
-import QuizList from './QuizList'
+import BookList from './BookList';
+import QuizList from './QuizList';
 import Quiz from './Quiz';
 
 class App extends Component {
@@ -17,6 +18,7 @@ class App extends Component {
           <NavigationBar />
           <Switch>
             <Route path="/login" component={Login} />
+            <Route path="/book-list" component={BookList} />
             <Route path="/quiz-list" component={QuizList} />
             <Route path="/take-quiz" component={Quiz} />
             <PrivateRoute

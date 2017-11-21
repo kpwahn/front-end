@@ -18,7 +18,7 @@ class NavigationBar extends Component {
     return (
       <div className="navigationBar">
         <div className="main-link-wrapper">
-          <Link to="/quiz-list" className="main-link">Nav bar</Link>
+          <Link to="/book-list" className="main-link">Nav bar</Link>
         </div>
         <div className="links">
           { logInOut }
