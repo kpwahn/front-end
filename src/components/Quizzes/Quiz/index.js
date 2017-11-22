@@ -5,9 +5,10 @@ import './styles.css';
 
 class Quiz extends Component {
   render() {
+    console.log(this.props)
     return (
       <div className="Quiz">
-        Taking the {this.props.activeQuiz.name}
+        You ready to take the {this.props.activeQuiz.name}?
       </div>
     );
   }

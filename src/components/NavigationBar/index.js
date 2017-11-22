@@ -20,9 +20,6 @@ class NavigationBar extends Component {
         <div className="main-link-wrapper">
           <Link to="/book-list" className="main-link">Nav bar</Link>
         </div>
-        <div className="links">
-          { logInOut }
-        </div>
       </div>
     );
   }
@@ -35,3 +32,9 @@ const mapStateToProps = function(state) {
 }
 
 export default connect(mapStateToProps, { logoutAction })(NavigationBar);
+
+/*
+<div className="links">
+  { logInOut }
+</div>
+*/

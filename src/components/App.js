@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import PrivateRoute from './PrivateRoute';
 import NavigationBar from './NavigationBar';
-import Login from './Login';
-import Home from './Home';
-import BookList from './BookList';
-import QuizList from './QuizList';
-import Quiz from './Quiz';
+import BookList from './Books/BookList';
+import QuizList from './Quizzes/QuizList';
+import Quiz from './Quizzes/Quiz';
 
 class App extends Component {
   render() {
@@ -17,15 +13,9 @@ class App extends Component {
         <div>
           <NavigationBar />
           <Switch>
-            <Route path="/login" component={Login} />
             <Route path="/book-list" component={BookList} />
             <Route path="/quiz-list" component={QuizList} />
-            <Route path="/take-quiz" component={Quiz} />
-            <PrivateRoute
-              path="/"
-              component={Home}
-              user={this.props.user}
-              />
+            <Route path="/quiz" component={Quiz} />
           </Switch>
         </div>
       </BrowserRouter>
@@ -33,10 +23,4 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = function(state) {
-  return {
-    user: state.user
-  };
-}
-
-export default connect(mapStateToProps)(App);
+export default App;
