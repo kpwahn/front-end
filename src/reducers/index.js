@@ -6,14 +6,18 @@ import activeBookReducer from '../components/Books/BookListItem/reducer';
 import bookListReducer from '../components/Books/BookList/reducer';
 import quizListReducer from '../components/Quizzes/QuizList/reducer';
 import activeQuizReducer from '../components/Quizzes/QuizListItem/reducer';
+import questionsReducer from '../components/Quizzes/Quiz/reducer';
+import answerListReducer from '../components/Quizzes/QuizQuestion/reducer';
 
 const rootReducer = combineReducers({
   form: formReducer,
   user: loginReducer,
   activeBook: activeBookReducer,
   bookList: bookListReducer,
+  activeQuiz: activeQuizReducer,
   quizList: quizListReducer,
-  activeQuiz: activeQuizReducer
+  questionList: questionsReducer,
+  answerList: answerListReducer
 });
 
 export default rootReducer;

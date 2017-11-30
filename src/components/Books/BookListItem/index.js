@@ -11,8 +11,10 @@ class BookListItem extends Component {
     return (
       <div className="BookListItem">
         <GenericListItem
+          buttonText={'Select Book'}
+          history={this.props.history}
           name={this.props.name}
-          onClick={() => { this.props.setActiveBookAction({activeBook: this.props.id}) }}
+          onClick={() => { this.props.setActiveBookAction({name: this.props.name, activeBook: this.props.id}) }}
           to="/quiz-list"
         />
       </div>
@@ -21,6 +23,7 @@ class BookListItem extends Component {
 }
 
 BookListItem.propTypes = {
+  history: PropTypes.object,
   id: PropTypes.string,
   name: PropTypes.string,
   onClick: PropTypes.func

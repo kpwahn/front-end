@@ -1,3 +1,10 @@
-.quizList {
-  margin-top: 50px;
+.QuizList {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-column-gap: 25px;
+  grid-row-gap: 25px;
 }

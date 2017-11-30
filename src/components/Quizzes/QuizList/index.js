@@ -20,6 +20,7 @@ class QuizList extends Component {
     return this.props.quizList.map((quiz) => {
       return (
         <QuizListItem
+          history={this.props.history}
           id={quiz.id}
           key={quiz.id}
           name={quiz.name}
@@ -32,7 +33,7 @@ class QuizList extends Component {
     let quizList = this.quizList();
 
     return (
-      <div className="quizList">
+      <div className="QuizList">
         {quizList}
       </div>
     );

@@ -20,8 +20,9 @@
     "webpack-dev-server": "2.9.3"
   },
   "dependencies": {
-    "axios": "0.17.0",
+    "axios": "^0.17.0",
     "babel-preset-stage-1": "6.24.1",
+    "material-ui": "^0.19.4",
     "prop-types": "15.6.0",
     "react": "16.0.0",
     "react-dom": "16.0.0",
@@ -31,6 +32,7 @@
     "redux": "3.7.2",
     "redux-actions": "2.2.1",
     "redux-form": "7.1.2",
+    "redux-form-material-ui": "^4.3.1",
     "redux-promise": "0.5.3"
   }
 }

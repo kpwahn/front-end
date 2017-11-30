@@ -1,12 +1,10 @@
 import { handleAction } from 'redux-actions';
-import { SET_ACTIVE_QUIZ } from './actions';
+import { GET_QUESTIONS } from './actions';
 
-const defaultState = {
-  name: ""
-};
+const defaultState = [];
 
-const activeQuizReducer = handleAction(SET_ACTIVE_QUIZ, (state, action) => {
-  return {...state, name: action.payload.name}
+const questionsReducer = handleAction(GET_QUESTIONS, (state, action) => {
+  return action.payload.data.data;
 }, defaultState);
 
-export default activeQuizReducer;
+export default questionsReducer;

@@ -23,6 +23,7 @@ class BookList extends Component {
     return this.props.bookList.map((book) => {
       return (
         <BookListItem
+          history={this.props.history}
           id={book.id}
           key={book.id}
           name={book.name}

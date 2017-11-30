@@ -8,16 +8,25 @@
   max-height: 50px;
   z-index: 10;
 
-  background: aqua;
+  background: #00BCD4;
 }
 
 .main-link-wrapper {
   display: flex;
   flex: 1;
+  align-items: center;
 }
 
 .main-link {
   margin: 0px;
+  padding: 15px 10px;
+
+  text-decoration: none;
+  color: 	white;
+}
+
+.main-link:hover {
+  background-color: #4DD0E1;
 }
 
 .links {
