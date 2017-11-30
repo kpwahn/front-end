@@ -39,7 +39,6 @@ class QuizQuestion extends Component {
     if(this.props.activeQuiz.page === 0 ) {
       previousButton = null;
     }
-
     return (
       <form onSubmit={this.props.handleSubmit(this.props.onSubmit)} className="QuizQuestion">
         <CardHeader
@@ -48,7 +47,7 @@ class QuizQuestion extends Component {
         />
         <CardTitle title={this.props.question} />
         <Field
-          name="answer"
+          name={this.props.question}
           component={RadioButtonGroup}
           className="RadioButtonGroup"
         >
