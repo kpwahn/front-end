@@ -5,6 +5,7 @@ import {CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-
 import {RadioButton} from 'material-ui/RadioButton';
 import {  RadioButtonGroup } from 'redux-form-material-ui'
 import RaisedButton from 'material-ui/RaisedButton';
+import validate from './validate';
 import PropTypes from 'prop-types';
 
 import getAnswersAction from './actions';
@@ -25,7 +26,8 @@ class QuizQuestion extends Component {
   answerList() {
     return this.props.answerList.map((answer) => {
       return (
-          <RadioButton value={answer.answer} label={answer.answer} key={answer.answer}/>
+          <RadioButton value={answer.answer} label={answer.answer} key={answer.answer}>
+          </RadioButton>
       );
     })
   }
@@ -35,10 +37,11 @@ class QuizQuestion extends Component {
     if(this.props.activeQuiz.page === this.props.questionList.length - 1){
       nextButtonText = 'submit'
     }
-    let previousButton = (<RaisedButton label="Previous" secondary={true} onClick={this.props.onPrevious} />);
+    let previousDisabled = false;
     if(this.props.activeQuiz.page === 0 ) {
-      previousButton = null;
+      previousDisabled = true;
     }
+
     return (
       <form onSubmit={this.props.handleSubmit(this.props.onSubmit)} className="QuizQuestion">
         <CardHeader
@@ -47,15 +50,20 @@ class QuizQuestion extends Component {
         />
         <CardTitle title={this.props.question} />
         <Field
-          name={this.props.question}
+          name={this.props.questionId}
           component={RadioButtonGroup}
           className="RadioButtonGroup"
         >
           {this.answerList()}
         </Field>
         <CardActions style={{padding: 16}}>
-         {previousButton}
-         <RaisedButton type="submit" label={nextButtonText} primary={true}/>
+         <RaisedButton label="Previous" secondary={true} onClick={this.props.onPrevious} disabled={previousDisabled}/>
+         <RaisedButton
+            type="submit"
+            label={nextButtonText}
+            primary={true}
+            disabled={this.props.invalid}
+          />
        </CardActions>
       </form>
     )
@@ -80,5 +88,6 @@ QuizQuestion = connect(mapStateToProps, {getAnswersAction})(QuizQuestion);
 export default reduxForm({
   form: 'wizard', // <------ same form name
  destroyOnUnmount: false, // <------ preserve form data
- forceUnregisterOnUnmount: true // <------ unregister fields on unmount
+ forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
+ validate
 })(QuizQuestion);

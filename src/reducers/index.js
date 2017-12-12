@@ -8,6 +8,7 @@ import quizListReducer from '../components/Quizzes/QuizList/reducer';
 import activeQuizReducer from '../components/Quizzes/QuizListItem/reducer';
 import questionsReducer from '../components/Quizzes/Quiz/reducer';
 import answerListReducer from '../components/Quizzes/QuizQuestion/reducer';
+import correctAnswerListReducer from '../components/Quizzes/QuizResults/reducer';
 
 const rootReducer = combineReducers({
   form: formReducer,
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
   activeQuiz: activeQuizReducer,
   quizList: quizListReducer,
   questionList: questionsReducer,
-  answerList: answerListReducer
+  answerList: answerListReducer,
+  correctAnswerList: correctAnswerListReducer
 });
 
 export default rootReducer;

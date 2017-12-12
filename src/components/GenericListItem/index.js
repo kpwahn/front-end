@@ -29,7 +29,7 @@ class GenericListItem extends Component {
             className="Link"
             to={this.props.to}
             onClick={this.props.onClick}
-          />}
+            />}
           />
         </CardActions>
       </div>

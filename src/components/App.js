@@ -8,6 +8,7 @@ import AppBar from 'material-ui/AppBar';
 import BookList from './Books/BookList';
 import QuizList from './Quizzes/QuizList';
 import Quiz from './Quizzes/Quiz';
+import QuizResults from './Quizzes/QuizResults';
 
 class App extends Component {
   render() {
@@ -23,6 +24,8 @@ class App extends Component {
               <Route path="/book-list" component={BookList} />
               <Route path="/quiz-list" component={QuizList} />
               <Route path="/quiz" component={Quiz} />
+              <Route path="/quiz-results" component={QuizResults} />
+              <Route path="/" component={BookList} />
             </Switch>
           </div>
         </BrowserRouter>

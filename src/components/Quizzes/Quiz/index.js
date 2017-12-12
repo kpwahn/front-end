@@ -26,7 +26,7 @@ class Quiz extends Component {
   }
 
   onSubmit() {
-    console.log(this.props.formValues.wizard.values);
+      this.props.history.push('/quiz-results');
   }
 
   createForm() {

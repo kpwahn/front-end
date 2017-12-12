@@ -1,0 +1,30 @@
+.QuizResult {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  padding: 10px 100px 0px 100px;
+}
+
+.progressBar {
+
+}
+
+.take-another {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.CircularProgressbar .CircularProgressbar-text {
+    font-size: 20px;
+    dominant-baseline: middle;
+    text-anchor: middle;
+}
+
+.CircularProgressbar-trail { stroke: #d6d6d6; }
+
+.progressbar-green .CircularProgressbar-path { stroke:  #4CAF50; }
+.progressbar-orange .CircularProgressbar-path { stroke:  #FF9800; }
+.progressbar-yellow .CircularProgressbar-path { stroke:  #FFEB3B; }
+.progressbar-red .CircularProgressbar-path { stroke:  #F44336; }
+.CircularProgressbar-path {stroke-linecap: round; transition: stroke-dashoffset 0.5s ease 0s;}
