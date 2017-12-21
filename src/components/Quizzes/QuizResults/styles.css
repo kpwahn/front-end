@@ -6,10 +6,10 @@
 }
 
 .progressBar {
-
+  margin-bottom: 40px;
 }
 
-.take-another {
+.action-buttons {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,4 +27,10 @@
 .progressbar-orange .CircularProgressbar-path { stroke:  #FF9800; }
 .progressbar-yellow .CircularProgressbar-path { stroke:  #FFEB3B; }
 .progressbar-red .CircularProgressbar-path { stroke:  #F44336; }
-.CircularProgressbar-path {stroke-linecap: round; transition: stroke-dashoffset 0.5s ease 0s;}
+.CircularProgressbar-path {stroke-linecap: round; transition: stroke-dashoffset 2s ease 0s;}
+
+@media screen and (max-width: 575px) {
+  .QuizResult {
+    grid-template-columns: 1fr;
+  }
+}

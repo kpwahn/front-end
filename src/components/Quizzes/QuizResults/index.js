@@ -18,6 +18,8 @@ class QuizResults extends Component {
       numQuestionsCorrect: 0,
       score: 0
     }
+
+    this.getColor = this.getColor.bind(this);
     this.clearForm = this.clearForm.bind(this);
   }
 
@@ -51,6 +53,21 @@ class QuizResults extends Component {
     });
   }
 
+  getColor(){
+    let s = this.state.score;
+    let className = '';
+    if(s <= 75 && s >= 50){
+      className = 'yellow';
+    } else if ( s < 50 && s >= 25) {
+      className = 'orange';
+    } else if (s < 25 ){
+      className = 'red';
+    } else {
+      className = 'green';
+    }
+    return className;
+  }
+
   clearForm(){
     this.props.dispatch(reset('wizard'));
   }
@@ -59,27 +76,16 @@ class QuizResults extends Component {
     if(this.state.loading) {
       return (<h1>Calculating Score...</h1>)
     } else {
-      let s = this.state.score;
-      let className = '';
-      if(s <= 75 && s >= 50){
-        className = 'yellow';
-      } else if ( s < 50 && s >= 25) {
-        className = 'orange';
-      } else if (s < 25 ){
-        className = 'red';
-      } else {
-        className = 'green';
-      }
       return (
         <div className="QuizResult">
           <div className="progressBar">
             <CircularProgressbar
-              className={`progressbar-${className}`}
+              className={`progressbar-${this.getColor()}`}
               initialAnimation={true}
-              percentage={s}
+              percentage={this.state.score}
             />
           </div>
-          <div className="take-another">
+          <div className="action-buttons">
           <RaisedButton
             label="Take Another Quiz"
             primary={true}
@@ -87,8 +93,8 @@ class QuizResults extends Component {
               className="Link"
               to="/book-list"
               onClick={this.props.onClick}
-              />}
-            />
+            />}
+          />
           </div>
         </div>
       );
@@ -97,6 +103,7 @@ class QuizResults extends Component {
 }
 
 const mapStateToProps = function(state){
+  console.log(state)
   return {
     correctAnswerList: state.correctAnswerList,
     form: state.form,

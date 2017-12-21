@@ -14,7 +14,7 @@ class BookListItem extends Component {
           buttonText={'Select Book'}
           history={this.props.history}
           name={this.props.name}
-          onClick={() => { this.props.setActiveBookAction({name: this.props.name, activeBook: this.props.id}) }}
+          onClick={() => { this.props.setActiveBookAction({name: this.props.name, activeBookId: this.props.id}) }}
           to="/quiz-list"
         />
       </div>

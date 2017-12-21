@@ -38,6 +38,7 @@ class BookList extends Component {
     return (
       <div className="bookList">
         {bookList}
+        {!this.props.bookList.length && <div>No books found</div>}
       </div>
     );
   }

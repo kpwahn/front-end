@@ -23,3 +23,10 @@
 .Link:hover {
   background-color: #4DD0E1;
 }
+
+@media screen and (max-width: 575px) {
+  .GenericListItem {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

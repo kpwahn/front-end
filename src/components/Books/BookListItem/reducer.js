@@ -1,10 +1,17 @@
 import { handleAction } from 'redux-actions';
 import { SET_BOOK } from './actions';
 
-const defaultState = {};
+const defaultState = {
+  name: undefined,
+  activeBookId: undefined
+};
 
 const activeBookReducer = handleAction(SET_BOOK, (state, action) => {
-  return {...state, ...action.payload}
+  return {
+    ...state,
+    name: action.payload.name,
+    activeBookId: action.payload.activeBookId
+  }
 }, defaultState);
 
 export default activeBookReducer;

@@ -60,9 +60,12 @@ class Quiz extends Component {
 
   render() {
     return (
-      <Card className="Quiz">
-        {this.createForm()}
-      </Card>
+      <div>
+        {!this.props.questionList.length && <div>No questions for this quiz</div>}
+        <Card className="Quiz">
+          {this.createForm()}
+        </Card>
+      </div>
     );
   }
 }

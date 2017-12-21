@@ -20,7 +20,9 @@ class GenericListItem extends Component {
   render() {
     return (
       <div className="GenericListItem" onClick={this.changeRoute}>
-        <CardHeader title={this.props.name} />
+        <CardHeader
+        titleStyle={{fontWeight: 600}}
+        title={this.props.name} />
         <CardActions>
           <RaisedButton
           label={this.props.buttonText}

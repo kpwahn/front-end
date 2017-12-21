@@ -13,7 +13,7 @@ class QuizList extends Component {
   }
 
   componentDidMount(){
-    this.props.getQuizzesAction(this.props.book)
+    this.props.getQuizzesAction(this.props.activeBook)
   }
 
   quizList() {
@@ -35,13 +35,14 @@ class QuizList extends Component {
     return (
       <div className="QuizList">
         {quizList}
+        {!this.props.quizList.length && <div>No Quizzes found</div>}
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  return {quizList: state.quizList, book: state.activeBook}
+  return {quizList: state.quizList, activeBook: state.activeBook}
 }
 
 export default connect(mapStateToProps, {getQuizzesAction})(QuizList);
