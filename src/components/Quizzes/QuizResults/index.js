@@ -30,18 +30,12 @@ class QuizResults extends Component {
     let answers = (this.props.form.wizard) ? this.props.form.wizard.values : undefined;
     let answer_key = this.props.answerKey;
 
-    console.log(answers)
-
     if(!answers || !answer_key) {
       return {loading: loading, numQuestionsCorrect, numQuestionsCorrect, score: score};
     }
 
     _.each(answers, (answer, answer_id) => {
       _.map(answer_key, (correct_answer) => {
-        console.log(answer)
-        console.log(answer_id);
-        console.log(correct_answer);
-
         if( answer === correct_answer.answer && answer_id === correct_answer.question_id ) {
           numQuestionsCorrect++;
         }
