@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {reset} from 'redux-form';
 import _ from 'lodash';
-import getCorrectAnswersAction from './actions';
+import getAnswerKeyAction from './actions';
 import RaisedButton from 'material-ui/RaisedButton';
 import CircularProgressbar from 'react-circular-progressbar';
 
@@ -13,48 +13,53 @@ class QuizResults extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      loading: true,
-      numQuestionsCorrect: 0,
-      score: 0
-    }
-
-    this.getColor = this.getColor.bind(this);
-    this.clearForm = this.clearForm.bind(this);
+    this._getColor = this._getColor.bind(this);
+    this._clearForm = this._clearForm.bind(this);
+    this._calculateScore = this._calculateScore.bind(this);
   }
 
   componentDidMount() {
-    Promise.all(
-      this.props.questionList.map((question, index)=> {
-        if(index === 0){
-          question.first = true;
-        }
-        return this.props.getCorrectAnswersAction(question);
-      })
-    ).then(() => {
-      setTimeout(() => {
-        let al = this.props.form.wizard.values;
-        let cal = this.props.correctAnswerList;
-
-        _.each(al, (cvalue, ckey) => {
-          _.each(cal, (avalue, akey) => {
-              if(cvalue === avalue.answer.answer && ckey === avalue.answer.question_id ){
-                this.setState({numQuestionsCorrect: this.state.numQuestionsCorrect + 1})
-              }
-          });
-        });
-
-        this.setState({loading: false});
-        this.clearForm();
-        setTimeout(()=>{
-          this.setState({score: (( this.state.numQuestionsCorrect / cal.length ) * 100).toFixed() });
-        }, 100);
-      }, 1000)
-    });
+    this.props.getAnswerKeyAction(this.props.activeQuiz.id);
   }
 
-  getColor(){
-    let s = this.state.score;
+  _calculateScore(){
+    let loading = true;
+    let numQuestionsCorrect = 0;
+    let score = 0;
+
+    let answers = (this.props.form.wizard) ? this.props.form.wizard.values : undefined;
+    let answer_key = this.props.answerKey;
+
+    console.log(answers)
+
+    if(!answers || !answer_key) {
+      return {loading: loading, numQuestionsCorrect, numQuestionsCorrect, score: score};
+    }
+
+    _.each(answers, (answer, answer_id) => {
+      _.map(answer_key, (correct_answer) => {
+        console.log(answer)
+        console.log(answer_id);
+        console.log(correct_answer);
+
+        if( answer === correct_answer.answer && answer_id === correct_answer.question_id ) {
+          numQuestionsCorrect++;
+        }
+      });
+    });
+
+    loading = false;
+    score = (( numQuestionsCorrect / answer_key.length ) * 100);
+
+    if(isNaN(score)){
+      score = 0;
+    }
+
+    return {loading: loading, numQuestionsCorrect, numQuestionsCorrect, score: score};
+  }
+
+  _getColor(score){
+    let s = score;
     let className = '';
     if(s <= 75 && s >= 50){
       className = 'yellow';
@@ -68,21 +73,23 @@ class QuizResults extends Component {
     return className;
   }
 
-  clearForm(){
+  _clearForm(){
     this.props.dispatch(reset('wizard'));
   }
 
   render() {
-    if(this.state.loading) {
+    let {loading, numQuestionsCorrect, score} = this._calculateScore();
+
+    if(loading) {
       return (<h1>Calculating Score...</h1>)
     } else {
       return (
         <div className="QuizResult">
           <div className="progressBar">
             <CircularProgressbar
-              className={`progressbar-${this.getColor()}`}
+              className={`progressbar-${this._getColor(score)}`}
               initialAnimation={true}
-              percentage={this.state.score}
+              percentage={score}
             />
           </div>
           <div className="action-buttons">
@@ -103,9 +110,9 @@ class QuizResults extends Component {
 }
 
 const mapStateToProps = function(state){
-  console.log(state)
   return {
-    correctAnswerList: state.correctAnswerList,
+    activeQuiz: state.activeQuiz,
+    answerKey: state.answerKey,
     form: state.form,
     questionList: state.questionList
   }
@@ -114,8 +121,8 @@ const mapStateToProps = function(state){
 const mapDispatchToProps = (dispatch) => {
   return {
     dispatch,
-    getCorrectAnswersAction: (question) => {
-      dispatch(getCorrectAnswersAction(question))
+    getAnswerKeyAction: (question) => {
+      dispatch(getAnswerKeyAction(question))
     },
   }
 }

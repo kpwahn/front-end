@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { createAction } from 'redux-actions';
 
-export const GET_CORRECT_ANSWER = 'GET_CORRECT_ANSWER';
+export const GET_ANSWER_KEY = 'GET_ANSWER_KEY';
 
-const getCorrectAnswersAction = createAction(GET_CORRECT_ANSWER, function(question) {
-    const request = axios.get(`http://localhost:3000/api/books/xxxxx/quizzes/xxxxx/questions/${question.id}/answers?correct=true`);
+const getAnswerKeyAction = createAction(GET_ANSWER_KEY, function(quiz_id) {
+    const request = axios.get(`http://localhost:3000/api/books/xxxxx/quizzes/${quiz_id}/answer_key`);
     return request;
 }, (question) => { return question});
 
-export default getCorrectAnswersAction;
+export default getAnswerKeyAction;
