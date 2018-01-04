@@ -2,6 +2,8 @@
     ./webpack.config.js
 */
 const path = require('path');
+const webpack = require('webpack');
+
 module.exports = {
   entry: './src/index.js',
   output: {
@@ -19,5 +21,10 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
   },
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
+  plugins: [
+  new webpack.DefinePlugin({
+    PRODUCTION: JSON.stringify(false)
+  })
+]
 }
