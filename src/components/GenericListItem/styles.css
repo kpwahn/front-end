@@ -6,6 +6,10 @@
   margin: 0px 10px;
 }
 
+.GenericListItem > div > div {
+  padding-right: 0px !important;
+}
+
 .GenericListItem:hover {
   cursor: pointer;
 }

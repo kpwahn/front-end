@@ -43,7 +43,7 @@ class QuizResults extends Component {
     });
 
     loading = false;
-    score = (( numQuestionsCorrect / answer_key.length ) * 100);
+    score = (( numQuestionsCorrect / answer_key.length ) * 100).toFixed(2);
 
     if(isNaN(score)){
       score = 0;
